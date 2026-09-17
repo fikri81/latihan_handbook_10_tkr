@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REKAP NILAI GURU - TKR</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<style>@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;600&display=swap');body{font-family:'Inter',sans-serif}.font-racing{font-family:'Oswald',sans-serif}</style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen p-4">
+<div class="max-w-7xl mx-auto">
+<div class="bg-gradient-to-r from-emerald-600 to-green-600 rounded-2xl p-6 mb-6 flex justify-between items-center">
+<div><h1 class="font-racing text-2xl font-black text-black">REKAP NILAI TKR - LIVE</h1><p class="text-black/70 text-xs font-bold">SUPABASE SG | Auto Ranking 800</p></div>
+<div class="text-right"><p class="text-black text-3xl font-black font-racing" id="totalCount">0</p><p class="text-black/70 text-[10px] font-black uppercase">Total Submit</p></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-6">
+<div class="bg-zinc-900 border border-zinc-800 rounded-xl p-4"><p class="text-[10px] text-zinc-500 font-black uppercase">Rata-rata</p><p class="text-xl font-black text-emerald-400" id="avgScore">0%</p></div>
+<div class="bg-zinc-900 border border-zinc-800 rounded-xl p-4"><p class="text-[10px] text-zinc-500 font-black uppercase">Tertinggi</p><p class="text-xl font-black text-amber-400" id="topScore">0%</p></div>
+<div class="bg-zinc-900 border border-zinc-800 rounded-xl p-4"><p class="text-[10px] text-zinc-500 font-black uppercase">Terendah</p><p class="text-xl font-black text-red-400" id="lowScore">0%</p></div>
+<div class="bg-zinc-900 border border-zinc-800 rounded-xl p-4"><p class="text-[10px] text-zinc-500 font-black uppercase">Pelanggaran >2</p><p class="text-xl font-black text-red-400" id="violCount">0</p></div>
+</div>
+<div class="bg-zinc-900 border border-zinc-800 rounded-xl p-4 mb-4 flex flex-col md:flex-row gap-3 justify-between">
+<input id="search" placeholder="Cari nama / kelas..." class="bg-black border border-zinc-700 rounded-lg px-4 py-2.5 text-sm w-full md:w-80 outline-none focus:border-emerald-500" oninput="filterData()">
+<div class="flex gap-2">
+<button onclick="loadData()" class="bg-zinc-800 hover:bg-zinc-700 px-4 py-2.5 rounded-lg text-xs font-black uppercase"><i class="fa-solid fa-rotate"></i> Refresh</button>
+<button onclick="exportExcel()" class="bg-emerald-500 hover:bg-emerald-400 text-black px-5 py-2.5 rounded-lg text-xs font-black uppercase"><i class="fa-solid fa-file-excel"></i> Export Excel</button>
+<button onclick="deleteAll()" class="bg-red-900/50 hover:bg-red-900 border border-red-800 px-4 py-2.5 rounded-lg text-xs font-black uppercase text-red-300">Hapus Test</button>
+</div>
+</div>
+<div class="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
+<div class="overflow-auto max-h-[65vh]">
+<table class="w-full text-sm">
+<thead class="sticky top-0 bg-black border-b border-zinc-800 text-[10px] font-black uppercase text-zinc-500">
+<tr><th class="p-3 text-left">#</th><th class="p-3 text-left">Waktu</th><th class="p-3 text-left">Nama</th><th class="p-3 text-left">Kelas</th><th class="p-3 text-left">Absen</th><th class="p-3 text-center">PG</th><th class="p-3 text-center">%</th><th class="p-3 text-center">Viol</th><th class="p-3 text-left">ID</th><th class="p-3 text-center">Detail</th></tr>
+</thead>
+<tbody id="tbody" class="divide-y divide-zinc-800/50"></tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="detailModal" class="hidden fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"><div class="bg-zinc-900 border-2 border-emerald-500 rounded-2xl p-6 max-w-2xl w-full max-h-[80vh] overflow-auto"><div class="flex justify-between mb-4"><h3 class="font-racing font-black uppercase">Detail Jawaban</h3><button onclick="document.getElementById('detailModal').classList.add('hidden')" class="bg-zinc-800 px-3 py-1 rounded-lg text-xs">CLOSE</button></div><div id="detailContent" class="text-xs space-y-2"></div></div></div>
+<script>
+const SUPABASE_URL="https://rrwehnexvwsjiczrmbic.supabase.co";
+const SUPABASE_KEY="sb_publishable_SkFN8xg7I7DW59x6aX8dlw_4QYEGE44";
+const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let allData=[];
+async function loadData(){
+const {data,error}=await supabaseClient.from('ujian_tkr').select('*').order('percent',{ascending:false});
+if(error){alert(error.message);return;}
+allData=data;render(data);
+document.getElementById('totalCount').innerText=data.length;
+if(data.length){const scores=data.map(d=>d.percent);document.getElementById('avgScore').innerText=Math.round(scores.reduce((a,b)=>a+b,0)/scores.length)+'%';document.getElementById('topScore').innerText=Math.max(...scores)+'%';document.getElementById('lowScore').innerText=Math.min(...scores)+'%';document.getElementById('violCount').innerText=data.filter(d=>d.violations>=2).length;}
+}
+function render(data){
+document.getElementById('tbody').innerHTML=data.map((r,i)=>`<tr class="hover:bg-zinc-800/50 ${r.violations>=3?'bg-red-950/30':''}"><td class="p-3 font-black">${i+1}</td><td class="p-3 text-[11px] text-zinc-500">${new Date(r.created_at).toLocaleString('id-ID')}</td><td class="p-3 font-bold">${r.name}</td><td class="p-3">${r.class}</td><td class="p-3 text-center">${r.absen||'-'}</td><td class="p-3 text-center font-black">${r.pg_score}/30</td><td class="p-3 text-center"><span class="px-2 py-1 rounded-full text-[11px] font-black ${r.percent>=75?'bg-green-500/20 text-green-400':r.percent>=50?'bg-amber-500/20 text-amber-400':'bg-red-500/20 text-red-400'}">${r.percent}%</span></td><td class="p-3 text-center ${r.violations>=2?'text-red-400 font-black':''}">${r.violations}</td><td class="p-3 text-[10px] text-zinc-500">${r.exam_id}</td><td class="p-3 text-center"><button onclick='showDetail(${JSON.stringify(r).replace(/'/g,"&#39;")})' class="bg-zinc-800 hover:bg-zinc-700 px-2 py-1 rounded text-[10px]">LIHAT</button></td></tr>`).join('');
+}
+function filterData(){const q=document.getElementById('search').value.toLowerCase();const f=allData.filter(r=>r.name.toLowerCase().includes(q)||r.class.toLowerCase().includes(q));render(f);}
+function showDetail(r){if(typeof r==='string')r=JSON.parse(r);document.getElementById('detailContent').innerHTML=`<p><b>Nama:</b> ${r.name} | ${r.class} | Absen ${r.absen}</p><p><b>PG:</b> ${r.pg_score}/30 (${r.percent}%) | Viol: ${r.violations}</p><p class="mt-3 font-black uppercase">Jawaban PG:</p><div class="bg-black border border-zinc-800 rounded-lg p-3 grid grid-cols-5 gap-1 text-[10px]">${(r.answers||[]).map(a=>`<span class="${a.ok?'text-green-400':'text-red-400'}">Q${a.q}:${a.sel!==null?String.fromCharCode(65+a.sel):'-'}/${String.fromCharCode(65+a.cor)} ${a.ok?'✓':'✗'}</span>`).join('')}</div><p class="mt-3 font-black uppercase">Essay:</p><div class="space-y-2">${(r.essays||[]).map((e,i)=>`<div class="bg-black border border-zinc-800 rounded p-2"><b>Essay ${i+1}:</b> ${e||'<i class="text-zinc-600">kosong</i>'}</div>`).join('')}</div>`;document.getElementById('detailModal').classList.remove('hidden');}
+function exportExcel(){if(!allData.length){alert('Belum ada data');return;}let csv="No,Nama,Kelas,Absen,PG Score,Percent,Violations,Exam ID,Waktu,Essay1,Essay2,Essay3,Essay4,Essay5\n";allData.forEach((r,i)=>{const row=[i+1,`"${r.name}"`,`"${r.class}"`,r.absen,r.pg_score,r.percent,r.violations,r.exam_id,new Date(r.created_at).toLocaleString('id-ID'),...(r.essays||[]).map(e=>`"${(e||'').replace(/"/g,'""')}"`)].join(',');csv+=row+'\n';});const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`rekap_tkr_${new Date().toISOString().slice(0,10)}.csv`;a.click();}
+async function deleteAll(){if(!confirm('Hapus data TEST doang? (yang nama fikri)'))return;const {error}=await supabaseClient.from('ujian_tkr').delete().eq('name','fikri');if(!error){alert('Data test fikri dihapus');loadData();}}
+loadData();setInterval(loadData,10000);
+</script>
+</body>
+</html>

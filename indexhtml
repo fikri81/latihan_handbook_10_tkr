@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google" content="notranslate">
-<title>SECURE EXAM - FINAL - SMKN Wongsorejo</title>
+<title>SECURE EXAM - SMKN Wongsorejo - X TKR</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <style>
@@ -12,7 +12,7 @@
 body{font-family:'Inter',sans-serif;background:#0a0a0a;user-select:none;}
 .font-racing{font-family:'Oswald',sans-serif;}
 .option-card:has(input:checked){border-color:#f59e0b;background:#f59e0b15;}
-textarea,input{user-select:text!important;}
+textarea,input{user-select:text!important;-webkit-user-select:text!important;}
 .watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:5;opacity:0.04;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(10,1fr);font-size:12px;color:white;font-weight:900;transform:rotate(-20deg);}
 .watermark span{padding:40px;white-space:nowrap;}
 </style>
@@ -21,28 +21,27 @@ textarea,input{user-select:text!important;}
 <div id="watermark" class="watermark"></div>
 <div class="h-1.5 w-full bg-gradient-to-r from-red-600 via-amber-500 to-red-600"></div>
 <div class="bg-red-600 text-white text-[10px] font-black px-4 py-1.5 flex justify-between items-center uppercase">
-<div class="flex items-center gap-4"><span>MAX SECURITY - CONNECTED TO SHEET</span></div>
-<div class="flex items-center gap-3"><span id="violationCount">VIOLATIONS: 0/3</span><span id="secureStatus" class="bg-black px-2 py-0.5 rounded-full">SECURE</span></div>
+<div class="flex items-center gap-2"><i class="fa-solid fa-shield-halved"></i>MAX SECURITY - AUTO SHEET - X TKR</div>
+<div class="flex gap-3"><span id="violationCount">VIOLATIONS: 0/3</span><span id="secureStatus" class="bg-black px-2 py-0.5 rounded-full">SECURE</span></div>
 </div>
 <header class="bg-black border-b-2 border-amber-500/50 p-3 sticky top-0 z-40">
 <div class="max-w-4xl mx-auto flex justify-between items-center">
-<div class="flex items-center gap-3"><img src="https://cdn.jsdelivr.net/gh/fikri81/handbook_TKR@main/logob.png" class="w-10 h-10 bg-white rounded-xl p-1"><div><h1 class="font-racing font-black text-sm uppercase">SECURE EXAM <span class="text-amber-500">FINAL</span></h1><p class="text-[9px] text-zinc-500">Auto Send to Sheet • Fullscreen Required</p></div></div>
+<div class="flex items-center gap-3"><img src="https://cdn.jsdelivr.net/gh/fikri81/handbook_TKR@main/logob.png" class="w-10 h-10 bg-white rounded-xl p-1"><div><h1 class="font-racing font-black text-sm uppercase">SECURE EXAM <span class="text-amber-500">30 PG + ESSAY</span></h1><p class="text-[9px] text-zinc-500">All English Word - Auto Send to Google Sheet</p></div></div>
 <div class="text-right"><p class="text-[9px] text-zinc-500 font-black">TIME LEFT</p><p class="text-xl font-black font-racing text-amber-500" id="timer">45:00</p></div>
 </div>
 </header>
 <div id="fsPrompt" class="fixed inset-0 bg-black/95 z-[200] flex items-center justify-center p-4">
 <div class="bg-zinc-900 border-2 border-amber-500 rounded-2xl p-8 max-w-md w-full text-center">
-<i class="fa-solid fa-shield-halved text-5xl text-amber-500 mb-4"></i>
-<h2 class="text-xl font-black font-racing uppercase text-white">SECURE EXAM - FINAL</h2>
-<p class="text-xs text-zinc-400 mt-2">Sudah terhubung ke Google Sheet! Nilai otomatis masuk.</p>
-<div class="mt-6 space-y-3">
-<div class="bg-black border border-zinc-800 rounded-lg p-3 text-left">
-<input id="fsName" placeholder="Nama Lengkap" class="w-full bg-zinc-900 border border-zinc-700 rounded px-3 py-2 text-sm mb-2 outline-none">
-<input id="fsClass" placeholder="Kelas" class="w-full bg-zinc-900 border border-zinc-700 rounded px-3 py-2 text-sm mb-2 outline-none">
-<input id="fsAbsen" placeholder="No Absen" class="w-full bg-zinc-900 border border-zinc-700 rounded px-3 py-2 text-sm outline-none">
+<i class="fa-solid fa-graduation-cap text-5xl text-amber-500 mb-4"></i>
+<h2 class="text-xl font-black font-racing uppercase text-white">UJIAN ESP OTOMOTIF</h2>
+<p class="text-xs text-zinc-400 mt-2">Kelas X TKR - 30 PG + 5 Essay English<br>Anti Screenshot, Anti Minimize, Anti Translate. Nilai auto masuk Sheet.</p>
+<div class="mt-6 bg-black border border-zinc-800 rounded-lg p-3 text-left space-y-2">
+<input id="fsName" placeholder="Nama Lengkap" class="w-full bg-zinc-900 border border-zinc-700 rounded px-3 py-2.5 text-sm outline-none focus:border-amber-500">
+<input id="fsClass" placeholder="Kelas (ex: X TKR 1)" class="w-full bg-zinc-900 border border-zinc-700 rounded px-3 py-2.5 text-sm outline-none focus:border-amber-500">
+<input id="fsAbsen" placeholder="No Absen" class="w-full bg-zinc-900 border border-zinc-700 rounded px-3 py-2.5 text-sm outline-none focus:border-amber-500">
 </div>
-<button onclick="startSecureExam()" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-black font-black py-3 rounded-xl uppercase font-racing text-sm">MULAI UJIAN - FULLSCREEN</button>
-</div>
+<button onclick="startSecureExam()" class="w-full mt-4 bg-gradient-to-r from-amber-500 to-orange-600 text-black font-black py-3.5 rounded-xl uppercase font-racing text-sm"><i class="fa-solid fa-lock mr-2"></i>MULAI UJIAN - FULLSCREEN</button>
+<p class="text-[9px] text-green-400 mt-3"><i class="fa-solid fa-link mr-1"></i>Connected to Google Sheet</p>
 </div>
 </div>
 <div id="secureOverlay" class="hidden fixed inset-0 bg-black/80 z-[150] flex items-center justify-center p-4">
@@ -51,7 +50,7 @@ textarea,input{user-select:text!important;}
 <h2 class="text-lg font-black font-racing uppercase text-white" id="overlayTitle">CHEATING DETECTED!</h2>
 <p class="text-sm text-red-200 mt-2" id="overlayMsg"></p>
 <p class="text-[10px] text-zinc-400 mt-4" id="overlayCount"></p>
-<button onclick="resumeExam()" class="mt-6 bg-white text-black font-black px-6 py-2.5 rounded-xl text-xs uppercase w-full">KEMBALI</button>
+<button onclick="resumeExam()" class="mt-6 bg-white text-black font-black px-6 py-2.5 rounded-xl text-xs uppercase w-full">KEMBALI KE UJIAN</button>
 </div>
 </div>
 <main class="max-w-4xl mx-auto w-full p-3 flex-grow relative z-10">
@@ -60,16 +59,16 @@ textarea,input{user-select:text!important;}
 <div class="text-[9px] text-zinc-500 font-bold">ID: <span id="examId" class="text-amber-500">-</span></div>
 </div>
 <form id="examForm"><div id="pgContainer" class="space-y-4"></div>
-<div class="mt-8 bg-zinc-900 border-2 border-amber-500/20 rounded-xl p-4"><h3 class="font-racing font-black uppercase text-amber-500 mb-4 text-sm">ESSAY SECTION - 5 QUESTIONS</h3><div id="essayContainer" class="space-y-4"></div></div>
-<div class="mt-6"><button type="button" onclick="submitExam()" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-black font-black py-4 rounded-xl uppercase font-racing text-sm">SUBMIT FINAL - AUTO SEND TO SHEET</button></div>
+<div class="mt-8 bg-gradient-to-br from-zinc-900 to-black border-2 border-amber-500/20 rounded-xl p-4"><h3 class="font-racing font-black uppercase text-amber-500 mb-4 text-sm"><i class="fa-solid fa-pen mr-2"></i>ESSAY SECTION - 5 QUESTIONS - ENGLISH WORD</h3><div id="essayContainer" class="space-y-4"></div></div>
+<div class="mt-6"><button type="button" onclick="submitExam()" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-black font-black py-4 rounded-xl uppercase font-racing text-sm"><i class="fa-solid fa-paper-plane mr-2"></i>SUBMIT FINAL - KIRIM KE GURU</button><p class="text-[9px] text-zinc-600 text-center mt-2 uppercase">Submit will lock exam & auto send to Sheet ID: 1UgyP...</p></div>
 </form>
 </main>
-<div id="resultModal" class="hidden fixed inset-0 bg-black/95 flex items-center justify-center z-[200] p-4">
-<div class="bg-zinc-900 border-2 border-green-500 rounded-2xl p-6 max-w-lg w-full">
-<div class="text-center"><i class="fa-solid fa-circle-check text-5xl text-green-500 mb-3"></i><h2 class="font-black font-racing uppercase text-xl">EXAM SUBMITTED!</h2></div>
+<div id="resultModal" class="hidden fixed inset-0 bg-black/95 flex items-center justify-center z-[200] p-4 overflow-y-auto">
+<div class="bg-zinc-900 border-2 border-green-500 rounded-2xl p-6 max-w-lg w-full my-8">
+<div class="text-center"><i class="fa-solid fa-circle-check text-5xl text-green-500 mb-3"></i><h2 class="font-black font-racing uppercase text-xl">EXAM SUBMITTED!</h2><p class="text-xs text-zinc-400 mt-1">Nilai otomatis masuk Google Sheet Guru</p></div>
 <div id="finalResult" class="mt-4"></div>
 <div id="sheetStatus" class="mt-4 text-center text-xs bg-black border border-zinc-800 rounded-lg p-3"></div>
-<button onclick="location.reload()" class="w-full mt-4 bg-amber-500 text-black font-black py-3 rounded-xl uppercase text-sm font-racing">CLOSE</button>
+<button onclick="location.reload()" class="w-full mt-4 bg-zinc-800 text-white font-bold py-3 rounded-xl text-sm border border-zinc-700">CLOSE</button>
 </div>
 </div>
 <script>
@@ -90,9 +89,9 @@ window.addEventListener('blur',()=>{if(!examStarted)return;addViolation('Window 
 document.addEventListener('fullscreenchange',()=>{if(!examStarted)return;if(!document.fullscreenElement){addViolation('Exit Fullscreen!');}});
 function addViolation(msg){if(!examStarted)return;violations++;document.getElementById('violationCount').innerText=`VIOLATIONS: ${violations}/3`;document.getElementById('secureStatus').innerText='VIOLATION!';document.getElementById('overlayTitle').innerText=`CHEATING DETECTED! (${violations}/3)`;document.getElementById('overlayMsg').innerText=msg;document.getElementById('overlayCount').innerText=`Jika 3x pelanggaran auto submit! Pelanggaran ke-${violations}: ${msg}`;document.getElementById('secureOverlay').classList.remove('hidden');if(violations>=3){setTimeout(()=>{alert('3x Pelanggaran! Auto Submit!');submitExam(true);},1500);}}
 function resumeExam(){document.getElementById('secureOverlay').classList.add('hidden');enterFullscreen();}
-function renderExam(){document.getElementById('pgContainer').innerHTML=examData.map((item,idx)=>`<div class="bg-zinc-900 border border-zinc-800 rounded-xl p-4 select-none" id="q-${item.id}"><div class="flex justify-between items-start mb-3"><span class="text-[9px] font-black px-2 py-1 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">${item.cat} - Q${item.id}</span><span class="text-[9px] text-zinc-500">ENGLISH - NO TRANSLATE</span></div><div class="flex gap-3 mb-3"><img src="${CDN+item.img}" class="w-14 h-14 object-contain bg-white rounded-lg p-1 flex-shrink-0" draggable="false"><p class="text-sm font-semibold leading-snug">${idx+1}. ${item.q}</p></div><div class="space-y-2">${item.options.map((opt,oIdx)=>`<label class="option-card flex items-start gap-3 p-3 rounded-lg border-2 border-zinc-700 bg-black cursor-pointer"><input type="radio" name="q${item.id}" value="${oIdx}" class="mt-1 accent-amber-500" onchange="updateProgress()"><span class="text-[11px] font-black bg-zinc-800 text-zinc-300 w-6 h-6 flex items-center justify-center rounded-full flex-shrink-0">${String.fromCharCode(65+oIdx)}</span><span class="text-xs leading-relaxed select-none">${opt}</span></label>`).join('')}</div></div>`).join('');document.getElementById('essayContainer').innerHTML=essayData.map(item=>`<div class="bg-black border border-zinc-800 rounded-xl p-4"><p class="text-sm font-semibold mb-3 select-none"><span class="bg-amber-500 text-black text-[10px] px-2 py-1 rounded font-black mr-2">ESSAY ${item.id}</span>${item.q}</p><textarea name="essay${item.id}" rows="4" placeholder="Type in English here..." class="w-full bg-zinc-900 border border-zinc-700 rounded-lg p-3 text-xs focus:border-amber-500 outline-none resize-none" oninput="updateProgress()"></textarea><p class="text-[9px] text-zinc-500 mt-1"><span id="wc-${item.id}">0 words</span></p></div>`).join('');}
+function renderExam(){document.getElementById('pgContainer').innerHTML=examData.map((item,idx)=>`<div class="bg-zinc-900 border border-zinc-800 rounded-xl p-4 select-none" id="q-${item.id}"><div class="flex justify-between items-start mb-3"><span class="text-[9px] font-black px-2 py-1 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">${item.cat} - Q${item.id}</span><span class="text-[9px] text-zinc-500">ENGLISH - NO TRANSLATE</span></div><div class="flex gap-3 mb-3"><img src="${CDN+item.img}" class="w-14 h-14 object-contain bg-white rounded-lg p-1 flex-shrink-0" draggable="false"><p class="text-sm font-semibold leading-snug">${idx+1}. ${item.q}</p></div><div class="space-y-2">${item.options.map((opt,oIdx)=>`<label class="option-card flex items-start gap-3 p-3 rounded-lg border-2 border-zinc-700 bg-black cursor-pointer"><input type="radio" name="q${item.id}" value="${oIdx}" class="mt-1 accent-amber-500" onchange="updateProgress()"><span class="text-[11px] font-black bg-zinc-800 text-zinc-300 w-6 h-6 flex items-center justify-center rounded-full flex-shrink-0">${String.fromCharCode(65+oIdx)}</span><span class="text-xs leading-relaxed select-none">${opt}</span></label>`).join('')}</div></div>`).join('');document.getElementById('essayContainer').innerHTML=essayData.map(item=>`<div class="bg-black border border-zinc-800 rounded-xl p-4"><p class="text-sm font-semibold mb-3 select-none"><span class="bg-amber-500 text-black text-[10px] px-2 py-1 rounded font-black mr-2">ESSAY ${item.id}</span>${item.q}</p><textarea name="essay${item.id}" rows="4" placeholder="Type in English here..." class="w-full bg-zinc-900 border border-zinc-700 rounded-lg p-3 text-xs focus:border-amber-500 outline-none resize-none" oninput="updateProgress()"></textarea><p class="text-[9px] text-zinc-500 mt-1"><span id="wc-${item.id}">0 words</span></p></div>`).join('');document.querySelectorAll('textarea').forEach(ta=>{ta.addEventListener('input',e=>{const id=e.target.name.replace('essay','');const words=e.target.value.trim().split(/\s+/).filter(w=>w).length;document.getElementById('wc-'+id).innerText=words+' words';});});}
 function updateProgress(){let answered=0;for(let i=1;i<=30;i++){if(document.querySelector(`input[name="q${i}"]:checked`))answered++;}for(let i=1;i<=5;i++){const ta=document.querySelector(`textarea[name="essay${i}"]`);if(ta&&ta.value.trim().length>10)answered++;}document.getElementById('progressText').innerText=`${answered}/35`;document.getElementById('progressBar').style.width=(answered/35*100)+'%';}
-function submitExam(isForced=false){if(!isForced&&!confirm('Yakin submit? Tidak bisa edit lagi!'))return;let pgScore=0;let details=[];for(let i=1;i<=30;i++){const sel=document.querySelector(`input[name="q${i}"]:checked`);const correct=examData[i-1].answer;if(sel){const v=parseInt(sel.value);if(v===correct)pgScore++;details.push({q:i,sel:v,cor:correct,ok:v===correct});}else{details.push({q:i,sel:null,cor:correct,ok:false});}}const essayAnswers=[];for(let i=1;i<=5;i++){essayAnswers.push(document.querySelector(`textarea[name="essay${i}"]`).value.trim());}const percent=Math.round(pgScore/30*100);document.getElementById('finalResult').innerHTML=`<p class="text-sm"><b>Nama:</b> ${studentInfo.name} | <b>Kelas:</b> ${studentInfo.cls} | <b>Absen:</b> ${studentInfo.absen}</p><p class="text-sm mt-2"><b>PG Score:</b> ${pgScore}/30 (${percent}%) | <b>Violations:</b> ${violations}/3 ${isForced?'<span class="text-red-400">(FORCED)</span>':''}</p>`;document.getElementById('resultModal').classList.remove('hidden');if(document.exitFullscreen)document.exitFullscreen();examStarted=false;document.getElementById('sheetStatus').innerText='Mengirim ke Google Sheet...';fetch(SHEET_URL,{method:'POST',mode:'no-cors',body:JSON.stringify({name:studentInfo.name,class:studentInfo.cls,absen:studentInfo.absen,pgScore,percent,violations,isForced,essays:essayAnswers,answers:details.map(d=>d.sel),timestamp:new Date().toLocaleString('id-ID'),examId:document.getElementById('examId').innerText})}).then(()=>{document.getElementById('sheetStatus').innerHTML='<span class="text-green-400 font-black">✓ BERHASIL TERKIRIM KE GOOGLE SHEET!</span>';}).catch(()=>{document.getElementById('sheetStatus').innerText='Gagal kirim, hubungi guru.';});}
+function submitExam(isForced=false){if(!isForced&&!confirm('Yakin submit? Tidak bisa edit lagi!'))return;let pgScore=0;let details=[];for(let i=1;i<=30;i++){const sel=document.querySelector(`input[name="q${i}"]:checked`);const correct=examData[i-1].answer;if(sel){const v=parseInt(sel.value);if(v===correct)pgScore++;details.push({q:i,sel:v,cor:correct,ok:v===correct});}else{details.push({q:i,sel:null,cor:correct,ok:false});}}const essayAnswers=[];for(let i=1;i<=5;i++){essayAnswers.push(document.querySelector(`textarea[name="essay${i}"]`).value.trim());}const percent=Math.round(pgScore/30*100);document.getElementById('finalResult').innerHTML=`<p class="text-sm"><b>Nama:</b> ${studentInfo.name} | <b>Kelas:</b> ${studentInfo.cls} | <b>Absen:</b> ${studentInfo.absen}</p><p class="text-sm mt-2"><b>PG Score:</b> ${pgScore}/30 (${percent}%) | <b>Violations:</b> ${violations}/3 ${isForced?'<span class="text-red-400">(FORCED)</span>':''}</p><p class="text-xs text-zinc-500 mt-2">ID: ${document.getElementById('examId').innerText}</p>`;document.getElementById('resultModal').classList.remove('hidden');if(document.exitFullscreen)document.exitFullscreen();examStarted=false;document.getElementById('sheetStatus').innerText='Mengirim ke Google Sheet...';fetch(SHEET_URL,{method:'POST',mode:'no-cors',body:JSON.stringify({name:studentInfo.name,class:studentInfo.cls,absen:studentInfo.absen,pgScore,percent,violations,isForced,essays:essayAnswers,answers:details.map(d=>d.sel),timestamp:new Date().toLocaleString('id-ID'),examId:document.getElementById('examId').innerText})}).then(()=>{document.getElementById('sheetStatus').innerHTML='<span class="text-green-400 font-black">✓ BERHASIL TERKIRIM KE GOOGLE SHEET!</span><br><span class="text-[10px] text-zinc-500">Cek Sheet ID: 1UgyPflUYNrZnC9ASw8VuqGGdfyW9en9Nl3-xnTt9_Lg</span>';}).catch(()=>{document.getElementById('sheetStatus').innerText='Gagal kirim, hubungi guru.';});}
 let timeLeft=45*60;function startTimer(){setInterval(()=>{if(!examStarted)return;timeLeft--;if(timeLeft<=0){submitExam(true);return;}const m=Math.floor(timeLeft/60);const s=timeLeft%60;document.getElementById('timer').innerText=`${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;},1000);}
 </script>
 </body>
